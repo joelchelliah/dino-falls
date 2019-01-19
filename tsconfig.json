@@ -1,6 +1,6 @@
 {
-  "compileOnSave": true,
-   "compilerOptions": {
-       "noImplicitAny" : true
-   }
+    "compilerOptions": {
+        "target": "ES2017",
+        "module": "CommonJs"
+    }
 }
