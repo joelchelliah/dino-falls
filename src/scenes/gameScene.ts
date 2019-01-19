@@ -1,5 +1,6 @@
 export class GameScene extends Phaser.Scene {
-  private background: Phaser.GameObjects.Image;
+  private sky: Phaser.GameObjects.TileSprite;
+  private trees: Phaser.GameObjects.TileSprite;
 
   constructor() {
     super({
@@ -8,7 +9,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image('background', './src/assets/images/background/sky.png')
+    this.load.image('sky', './assets/images/background/sky.png')
+    this.load.image('trees', './assets/images/background/trees.png')
   }
 
   init(): void {
@@ -16,8 +18,12 @@ export class GameScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.background = this.add.image(0, 0, 'background')
-    this.background.setOrigin(0, 0)
+    this.sky = this.add.tileSprite(0, 0, 800, 600, 'sky')
+      .setOrigin(0, 0)
+      .setScale(2)
+    this.trees = this.add.tileSprite(-20, 280, 800, 600, 'trees')
+      .setOrigin(0, 0)
+      .setScale(1.2)
   }
 
   update(): void {
