@@ -8,7 +8,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image('background', './src/assets/sky.png')
+    this.load.image('background', './src/assets/images/background/sky.png')
   }
 
   init(): void {
