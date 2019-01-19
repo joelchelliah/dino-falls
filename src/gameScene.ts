@@ -1,4 +1,5 @@
 export class GameScene extends Phaser.Scene {
+  private background: Phaser.GameObjects.Image;
 
   constructor() {
     super({
@@ -7,7 +8,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   preload(): void {
-    this.load.image('sky', './src/assets/sky.png')
+    this.load.image('background', './src/assets/sky.png')
   }
 
   init(): void {
@@ -15,7 +16,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.scene.start('GameScene')
+    this.background = this.add.image(0, 0, 'background')
+    this.background.setOrigin(0, 0)
   }
 
   update(): void {

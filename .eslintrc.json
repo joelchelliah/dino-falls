@@ -1,6 +1,8 @@
 {
-    "parser": "eslint-plugin-typescript/parser",
-    "plugins": ["typescript"],
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+        "typescript"
+    ],
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module"

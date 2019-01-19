@@ -9,11 +9,11 @@ const config: GameConfig = {
     width: 800,
     height: 600,
     type: Phaser.AUTO,
-    // scene: [GameScene],
+    scene: [GameScene],
     input: {
         mouse: true
     },
-    backgroundColor: '#1d2b53',
+    backgroundColor: '#aa2b53',
     render: { pixelArt: true, antialias: false, autoResize: false }
 }
 
