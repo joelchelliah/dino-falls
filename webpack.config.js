@@ -12,25 +12,25 @@ module.exports = {
     rules: [{
         test: /\.ts$/,
         loader: 'ts-loader',
-        exclude: '/node_modules/'
+        exclude: '/node_modules/',
       },
       {
         test: /phaser\.js$/,
-        loader: 'expose-loader?Phaser'
-      }
-    ]
+        loader: 'expose-loader?Phaser',
+      },
+    ],
   },
   devServer: {
     contentBase: path.resolve(__dirname, './'),
     publicPath: '/build/',
     host: '127.0.0.1',
     port: 8080,
-    open: true
+    open: true,
   },
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      phaser: phaser
-    }
-  }
+      phaser: phaser,
+    },
+  },
 }
