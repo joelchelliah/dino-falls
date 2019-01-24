@@ -1,3 +1,4 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var path = require('path')
 var pathToPhaser = path.join(__dirname, '/node_modules/phaser/')
 var phaser = path.join(pathToPhaser, 'dist/phaser.js')
@@ -8,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'game.js',
   },
+  plugins: [new HtmlWebpackPlugin()],
   module: {
     rules: [{
         test: /\.ts$/,
