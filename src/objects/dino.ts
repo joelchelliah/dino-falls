@@ -23,15 +23,24 @@ export class Dino {
         }
 
         this.speed = this.direction * (50 + Math.floor(Math.random() * 150))
-
-        this.body = this.currentScene.physics.add.sprite(this.xPos, 0, name)
-        this.body.setGravityY(600)
-        this.body.setScale(2)
-        this.body.scaleX *= this.direction
+        this.body = this.currentScene.physics.add.sprite(this.xPos, -75, name)
+            .setGravityY(600)
+            .setScale(2 * this.direction, 2)
+            .setOrigin(0, 0)
     }
 
-    isWalking(): boolean {
+    isTouchingGround(): boolean {
         return this.body.body.velocity.y === 0
+    }
+
+    walk(): void {
+        this.body.setVelocityX(this.speed)
+        this.body.anims.play(`${this.name}-walk`, true)
+    }
+
+    fall(): void {
+        this.body.setVelocityX(this.speed / 5)
+        this.body.anims.play(`${this.name}-idle`, true)
     }
 }
 
