@@ -106,9 +106,14 @@ export class GameScene extends Phaser.Scene {
   }
 
   createDino(): void {
-    const dino = new Dino({ scene: this })
+    const dino = new Dino({
+      scene: this,
+      x: Math.floor(Math.random() * 100),
+      y: -75,
+      key: 'dino',
+    })
 
-    this.physics.add.collider(dino.body, this.groundLayer)
+    this.physics.add.collider(dino, this.groundLayer)
     this.dinos.push(dino)
   }
 }
