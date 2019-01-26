@@ -8,7 +8,9 @@ const config: GameConfig = {
     version: '0.0.Prehistoric!',
     width: 800,
     height: 600,
+    zoom: 1,
     type: Phaser.AUTO,
+    parent: 'game',
     physics: {
         default: 'arcade',
         arcade: {
