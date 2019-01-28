@@ -18,7 +18,7 @@ export class Dino extends Physics.Arcade.Sprite {
         this.direction = 1
 
         if (Math.floor(Math.random() * 2) > 0) {
-            this.x += 700
+            this.x += 730
             this.direction = -1
         }
 
@@ -46,12 +46,14 @@ export class Dino extends Physics.Arcade.Sprite {
 
     walk(): void {
         this.setVelocityX(this.speed)
-        this.anims.play(`${this.name}-walk`, true)
+
+        if(this.speed < 120 && this.speed > -120) this.anims.play(`${this.name}-walk`, true)
+        else this.anims.play(`${this.name}-run`, true)
     }
 
     fall(): void {
         this.setVelocityX(this.speed / 5)
-        this.anims.play(`${this.name}-idle`, true)
+        this.anims.play(`${this.name}-fall`, true)
     }
 }
 
