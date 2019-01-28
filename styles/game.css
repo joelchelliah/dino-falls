@@ -1,4 +1,22 @@
 body {
   width: 800px;
-    margin: 20px auto;
+  margin: 20px auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.github {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.footer {
+  position: absolute;
+  bottom: 50px;
+}
+
+ul {
+  margin-block-start: 0;
 }
