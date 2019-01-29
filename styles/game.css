@@ -12,9 +12,13 @@ h2 {
   text-align: center;
 }
 
+#game {
+  width: 800px;
+  height: 600px;
+}
+
 .footer {
-  position: absolute;
-  bottom: 50px;
+  margin-top: 20px;
 }
 
 ul {
