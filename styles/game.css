@@ -1,4 +1,26 @@
 body {
   width: 800px;
-    margin: 20px auto;
+  margin: 20px auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.github {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#game {
+  width: 800px;
+  height: 512px;
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+ul {
+  margin-block-start: 0;
 }

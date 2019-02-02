@@ -6,9 +6,9 @@ import { GameScene } from './scenes/gameScene'
 const config: GameConfig = {
     title: 'Dino Falls',
     version: '0.0.Prehistoric!',
-    width: 800,
-    height: 600,
-    zoom: 1,
+    width: 27 * 16,
+    height: 16 * 16,
+    zoom: 2,
     type: Phaser.AUTO,
     parent: 'game',
     physics: {

@@ -5,39 +5,33 @@ export class Dino extends Physics.Arcade.Sprite {
 
     private direction: number
     private speed: number
+    private dinoNames: Array<string> = ['doux', 'mort', 'tard', 'vita']
 
     constructor(params) {
         super(params.scene, params.x, params.y, params.key, params.frame)
-
-
         params.scene.physics.world.enable(this)
 
-        const dinoNames = ['doux', 'mort', 'tard', 'vita']
+        this.name = this.dinoNames[Math.floor(Math.random() * this.dinoNames.length)]
 
-        this.name = dinoNames[Math.floor(Math.random() * dinoNames.length)]
-        this.direction = 1
-
-        if (Math.floor(Math.random() * 2) > 0) {
-            this.x += 700
+        if (this.x > 300) {
             this.direction = -1
+            this.x -= 8 // Fine-tuning spawning points
+        } else {
+            this.direction = 1
+            this.x -= 20 // Fine-tuning spawning points
         }
+        
+        this.y -= 8 // Fine-tuning spawning points
+        this.speed = this.direction * (30 + Math.floor(Math.random() * 120))
 
-        this.speed = this.direction * (50 + Math.floor(Math.random() * 150))
-
-        this.setScale(2 * this.direction, 2)
-        this.setOrigin(0, 0)
-        this.setGravityY(1000)
+        this.setScale(this.direction, 1)
+        this.setGravityY(600)
         this.setSize(14, 15)
 
         params.scene.add.existing(this)
 
-        if (this.direction > 0) {
-            this.body.setOffset(0, 0)
-        } else {
-            this.body.setOffset(18, 0)
-        }
-
-
+        if (this.direction > 0) this.body.setOffset(0, 0)
+        else this.body.setOffset(16, 0)
     }
 
     isTouchingGround(): boolean {
@@ -45,13 +39,16 @@ export class Dino extends Physics.Arcade.Sprite {
     }
 
     walk(): void {
+        const runSpeed = 100
         this.setVelocityX(this.speed)
-        this.anims.play(`${this.name}-walk`, true)
+
+        if(this.speed < runSpeed && this.speed > -runSpeed) this.anims.play(`${this.name}-walk`, true)
+        else this.anims.play(`${this.name}-run`, true)
     }
 
     fall(): void {
         this.setVelocityX(this.speed / 5)
-        this.anims.play(`${this.name}-idle`, true)
+        this.anims.play(`${this.name}-fall`, true)
     }
 }
 
