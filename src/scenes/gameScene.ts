@@ -1,4 +1,4 @@
-import { Dino } from '../objects/dino'
+import { Dino, dinoNames } from '../objects/dino'
 
 export class GameScene extends Phaser.Scene {
   private sky: Phaser.GameObjects.TileSprite;
@@ -25,35 +25,18 @@ export class GameScene extends Phaser.Scene {
     this.load.image('tileset', './assets/images/environment/tileset.png')
     this.load.tilemapTiledJSON('dino-map', 'assets/maps/dino-map.json')
 
-    this.load.spritesheet(
-      'doux',
-      'assets/images/dinos/doux.png',
-      this.getDinoFrames()
-    )
-    this.load.spritesheet(
-      'mort',
-      'assets/images/dinos/mort.png',
-      this.getDinoFrames()
-    )
-    this.load.spritesheet(
-      'tard',
-      'assets/images/dinos/tard.png',
-      this.getDinoFrames()
-    )
-    this.load.spritesheet(
-      'vita',
-      'assets/images/dinos/vita.png',
-      this.getDinoFrames()
-    )
+    dinoNames.map(name => this.preLoadDinoSprite(name))
   }
 
-  getDinoFrames(): Phaser.Loader.FileTypes.ImageFrameConfig {
-    return { frameWidth: 23, frameHeight: 21, margin: 3, spacing: 1 }
+  preLoadDinoSprite(name: string): void {
+    const config = { frameWidth: 23, frameHeight: 21, margin: 3, spacing: 1 }
+    this.load.spritesheet(name, `assets/images/dinos/${name}.png`, config)
   }
 
   init(): void {
     this.dinos = []
     this.dinoTick = 0
+    this.spawnPoints = []
   }
 
   create(): void {
@@ -84,14 +67,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   createDinos(): void {
-    this.createAnimations('doux')
-    this.createAnimations('mort')
-    this.createAnimations('tard')
-    this.createAnimations('vita')
+    dinoNames.map(name => this.createDinoAnimations(name))
     this.createDino()
   }
 
-  createAnimations(name: string): void {
+  createDinoAnimations(name: string): void {
     this.anims.create({
       key: `${name}-idle`,
       frames: this.anims.generateFrameNumbers(name, { start: 0, end: 3 }),

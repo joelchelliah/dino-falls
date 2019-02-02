@@ -1,17 +1,17 @@
 import { Physics } from 'phaser'
 
+export const dinoNames: Array<string> = ['doux', 'mort', 'tard', 'vita']
 export class Dino extends Physics.Arcade.Sprite {
     private anim: Phaser.Tweens.Tween[];
 
     private direction: number
     private speed: number
-    private dinoNames: Array<string> = ['doux', 'mort', 'tard', 'vita']
 
     constructor(params) {
         super(params.scene, params.x, params.y, params.key, params.frame)
         params.scene.physics.world.enable(this)
 
-        this.name = this.dinoNames[Math.floor(Math.random() * this.dinoNames.length)]
+        this.name = dinoNames[Math.floor(Math.random() * dinoNames.length)]
 
         if (this.x > 300) {
             this.direction = -1
@@ -39,10 +39,10 @@ export class Dino extends Physics.Arcade.Sprite {
     }
 
     walk(): void {
-        const runSpeed = 100
+        const shouldWalk = this.speed < 100 && this.speed > -100
         this.setVelocityX(this.speed)
 
-        if(this.speed < runSpeed && this.speed > -runSpeed) this.anims.play(`${this.name}-walk`, true)
+        if(shouldWalk) this.anims.play(`${this.name}-walk`, true)
         else this.anims.play(`${this.name}-run`, true)
     }
 
