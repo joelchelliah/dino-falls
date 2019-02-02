@@ -7,6 +7,7 @@ export class GameScene extends Phaser.Scene {
   private groundMap: Phaser.Tilemaps.Tilemap;
   private groundSet: Phaser.Tilemaps.Tileset;
   private groundLayer: Phaser.Tilemaps.StaticTilemapLayer;
+  private spawnPoints: Array<any>;
 
   private dinos: Array<Dino>;
   private dinoTick: number;
@@ -22,7 +23,7 @@ export class GameScene extends Phaser.Scene {
     this.load.image('trees', './assets/images/background/trees.png')
 
     this.load.image('tileset', './assets/images/environment/tileset.png')
-    this.load.tilemapTiledJSON('groundMap', 'assets/maps/ground.json')
+    this.load.tilemapTiledJSON('dino-map', 'assets/maps/dino-map.json')
 
     this.load.spritesheet(
       'doux',
@@ -74,25 +75,12 @@ export class GameScene extends Phaser.Scene {
   }
 
   createWorld(): void {
-    this.groundMap = this.add.tilemap('groundMap')
-    this.groundSet = this.groundMap.addTilesetImage('tileset')
-    this.groundLayer = this.groundMap.createStaticLayer(
-      'Ground Layer',
-      this.groundSet,
-      0,
-      0
-    )
-    this.groundLayer.setScale(2).setOrigin(0, 0)
-    this.groundMap.setCollision([
-      27,
-      29,
-      31,
-      133,
-      134,
-      135,
-      261,
-      262,
-    ])
+    this.groundMap = this.make.tilemap({ key: 'dino-map' })
+    this.groundSet = this.groundMap.addTilesetImage('tileset', 'tileset')
+    this.groundLayer = this.groundMap.createStaticLayer('Tile Layer 1', this.groundSet, -16, 0)
+    
+    this.groundLayer.setCollisionByProperty({collides: true})
+    this.spawnPoints = this.groundMap.getObjectLayer('Spawn points').objects
   }
 
   createDinos(): void {
@@ -144,7 +132,7 @@ export class GameScene extends Phaser.Scene {
     )
     this.dinoTick++
 
-    if (this.dinoTick > 40) {
+    if (this.dinoTick > 20) {
       this.dinoTick = 0
 
       this.createDino()
@@ -152,12 +140,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   createDino(): void {
-    const dino = new Dino({
-      scene: this,
-      x: Math.floor(Math.random() * 100),
-      y: -75,
-      key: 'dino',
-    })
+    const { name, x, y } = this.spawnPoints[Math.floor(Math.random() * this.spawnPoints.length)]
+    const dino = new Dino({ scene: this, x, y, key: 'dino' })
 
     this.physics.add.collider(dino, this.groundLayer)
     this.dinos.push(dino)
