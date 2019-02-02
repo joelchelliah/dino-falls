@@ -1,5 +1,5 @@
 body {
-  width: 864px;
+  width: 800px;
   margin: 20px auto;
 }
 
@@ -14,7 +14,7 @@ h2 {
 
 #game {
   width: 800px;
-  height: 600px;
+  height: 512px;
 }
 
 .footer {
